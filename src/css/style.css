@@ -52,8 +52,31 @@ body {
 
 .header {
     display: flex;
-    /* border: 1px solid white; */
-    height: 4rem;
+    /* height: 4rem; */
     padding: 18px;
     justify-content: space-between;
+    align-items: center;
+    background-color: #1b1b1b;
+}
+
+.todo-create {
+    padding: 8px 14px;
+    background-color: #151515;
+    border: none;
+    color: #9f9f9f;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.quote {
+    font-weight: 500;
+}
+
+.todo-counters {
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
 }
