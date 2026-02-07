@@ -1,6 +1,7 @@
 // Importing CSS
 import "./css/style.css"
-import { sideBarOpenClose } from "./modules/DOMcontroller.js";
+import { sideBarOpenClose, todoFormSubmission } from "./modules/DOMcontroller.js";
+import { todoForm } from "./modules/DOMcontroller.js";
 
 //Importing JS
 
@@ -12,3 +13,6 @@ console.log("Todo App Working");
 // Connecting UI to JS
 sideBarOpenClose()
 
+todoForm()
+
+todoFormSubmission()

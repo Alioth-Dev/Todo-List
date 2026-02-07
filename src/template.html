@@ -1,42 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Todo App</title>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="main-container">
-        <aside class="sidebar">
-            <div class="sidebar-group">
-                <div class="sidebar-icon-close">
-                    <img class ="sidebar-icon-img" src="./assets/sidebar.svg" alt="sidebar icon">
-                </div>
-                <div class="tasks-group">
-                    <p>Projects</p>
-                </div>
-            </div>
-        </aside>
-        <div class="todo-area">
-            <div class="header">
-                <div class="sidebar-icon-open">
-                    <img class ="sidebar-icon-img" src="./assets/sidebar.svg" alt="sidebar icon">
-                </div>
-                <div class="quote">
-                    <p>... Hardest Paths are the Easiest Paths ...</p>
-                </div>
-                <div class="add-todo">
-                    <button class="todo-create"><i class="fa-solid fa-plus"></i> Create Todo</button>
-                </div>
-            </div>
-            <div class="todos">
-                <div class="todo-counters">
-                    <!-- <p>Your Tasks :</p> -->
-                </div>
-                <div class="todo-list">here</div>
-            </div>
+      <aside class="sidebar">
+        <div class="sidebar-group">
+          <div class="sidebar-icon-close">
+            <img
+              class="sidebar-icon-img"
+              src="./assets/sidebar.svg"
+              alt="sidebar icon"
+            />
+          </div>
+          <div class="tasks-group">
+            <p>Projects</p>
+          </div>
         </div>
+      </aside>
+      <div class="todo-area">
+        <div class="header">
+          <div class="sidebar-icon-open">
+            <img
+              class="sidebar-icon-img"
+              src="./assets/sidebar.svg"
+              alt="sidebar icon"
+            />
+          </div>
+          <div class="quote">
+            <p>... Hardest Paths are the Easiest Paths ...</p>
+          </div>
+          <div class="add-todo">
+            <button class="todo-create">
+              <i class="fa-solid fa-plus"></i> Create Todo
+            </button>
+          </div>
+        </div>
+        <div class="todos">
+          <div class="todo-counters">
+            <!-- <p>Your Tasks :</p> -->
+          </div>
+          <div class="todo-list">here</div>
+        </div>
+      </div>
+
+      <dialog class="new-todo-form">
+        <form action="" id="todo-form">
+          <div class="form-title">Add Task</div>
+          <input type="text" id="title" name="title" placeholder="Title" />
+          <textarea rows="3" placeholder="Description"></textarea>
+          <div class="form-row">
+            <label for="priority">Priority</label>
+            <select id="priority" name="project">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="project">Project</label>
+            <select id="project" name="priject">
+              <option value="default">Default</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="duedate">Due Date</label>       
+            <input class="dueDate" i type="date" id="duedate" name="duedate" />
+          </div>
+          <input type="submit" value="Submit" />
+        </form>
+      </dialog>
     </div>
-</body>
+  </body>
 </html>
