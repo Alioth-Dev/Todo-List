@@ -188,3 +188,101 @@ select:active {
     width: 50%;
 }
 
+/* Designing Sidebar */
+
+.tasks-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 0.6rem;
+}
+
+.tasks-group p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.tasks-group ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 10px 0px;
+    margin-bottom: 5px;
+    /* background-color: #fff; */
+    /* align-items: center; */
+}
+.tasks-group ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    background-color: #1b1b1b;
+    list-style: none;
+    padding: 4px 16px;
+    border-radius: 5px;
+}
+
+.deleteProject {
+    color: red;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+.tasks-group ul li:hover .deleteProject {
+    opacity: 100;
+}
+
+.createprojectForm {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+.newProjectBtn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.newProjectAdd input[type='text'] {
+    border: none;
+    background-color: #1b1b1b;
+    padding: 6px 10px;
+    border-radius: 5px;
+    /* margin: 10px 20px; */
+    caret-color: #9f9f9f;
+    color: #9f9f9f;
+    font-size: 14px;
+    width: 100%;
+}
+
+input[type='text']:focus, input[type='number']:focus {
+    outline: none;
+}
+
+
+.newProjectAdd {
+  position: relative; /* Acts as an anchor for the button */
+  /* width: 300px; */
+}
+
+.newProjectAdd input {
+  width: 100%;
+  /* padding: 10px; */
+  /* padding-right: 50px; Space for the button so text doesn't overlap */
+  /* box-sizing: border-box; */
+}
+
+.newProjectAdd button {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%); /* Centers the button vertically */
+  /* padding: 5px 10px; */
+  background: none;
+  border: none;
+}
+
+.newProjectAdd button i {
+    color: green;
+    align-items: center;
+}
