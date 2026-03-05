@@ -28,8 +28,8 @@
             <div class="project-area">
               <p>Projects</p>
             </div>
-            <div class="proojectList">
-              <ul>
+            <div class="projectList">
+              <ul class="projects">
                 <li><div class="projectName">Default</div>
                 <div class="deleteProject"><i class="fa-regular fa-circle-xmark"></i></div></li>
                 <li>Web Dev</li>
@@ -37,7 +37,7 @@
               </ul>
             </div>
             <div class="createprojectForm">
-              <form class="newProjectAdd" action="">
+              <form class="newProjectAdd" id="newProjectAdd" action="">
                 <input type="text" id="newProject" name="project" placeholder="New Project">
                 <!-- <div class="newProjectBtn"> -->
                   <!-- <input type="submit" value="Submit" /> -->
@@ -89,7 +89,7 @@
           </div>
           <div class="form-row">
             <label for="project">Project</label>
-            <select id="project" name="priject">
+            <select id="projectOptions" name="project">
               <option value="default">Default</option>
             </select>
           </div>

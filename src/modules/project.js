@@ -2,6 +2,7 @@
 
 class Project {
     constructor(name) {
+        this.id = crypto.randomUUID();
         this.name = name;
         this.tasks = [];
     }
@@ -10,11 +11,15 @@ class Project {
         this.tasks.push(newTask);
     }
 
-    deleteTask(taskIndex) {
-        this.tasks.slice(taskIndex, 1)
+    deleteTask(taskID) {
+        this.tasks.filter(tempTask => tempTask.id !== taskID)
+        console.log("Delete Function Exe");
+        
     }
 
-    getTask(index){
-        return this.tasks[index]
+    getTask(uniqueID){
+        return this.tasks.find(taskID => taskID.id === uniqueID)
     }
 }
+
+export { Project };
