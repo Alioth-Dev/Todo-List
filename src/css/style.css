@@ -72,14 +72,6 @@ body {
     font-weight: 500;
 }
 
-.todo-counters {
-}
-
-.todo-list {
-    display: flex;
-    flex-direction: column;
-    padding: 5rem;
-}
 
 /* Designing Dialog Form */
 
@@ -222,6 +214,8 @@ select:active {
     border-radius: 5px;
 }
 
+
+
 .deleteProject {
     color: red;
     opacity: 0;
@@ -286,3 +280,75 @@ input[type='text']:focus, input[type='number']:focus {
     color: green;
     align-items: center;
 }
+
+
+/* Styling Task Area */
+.todos {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.todoProjectName {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.todo {
+    display: flex;
+    background-color: #151515;
+    justify-content: space-between;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+}
+
+.todoTitle {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 14;
+
+}
+
+.miniContainer {
+    display: flex;
+    gap: 1.4rem;
+    font-size: 14px;
+    
+}
+
+.rightContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.todoDelete :hover {
+    color: red;
+}
+
+#priority-High {
+    color: orange;
+}
+#priority-Medium {
+    color: yellow;
+}
+#priority-Low {
+    color: green;
+}
+
+/* .todoCheckList {
+    color: green;
+} */

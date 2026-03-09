@@ -1,8 +1,10 @@
 // Importing Logic Files
 import { Project } from "./project.js"
-// import { addProjectsToTaskForm } from "./ui.js";
+import { Task } from "./task.js";
 
+let activeProjectID = null;
 
+// import { getTaskSByProjectID } from "./core.js";
 // Connecting Ui to Js
 
 // Sidebar Open Close Functionality
@@ -68,10 +70,37 @@ function newProjectAdd(newProjectInstance) {
   });
 }
 
-// Display Tasks on performing click on projects ... and by default also
-function taskList(projectID) {
-  console.log("Print Tasksof Project with ID: " + projectID);
+function newTaskAdd(myTodo) {
+  const newTaskForm = document.querySelector("#todo-form")
+  newTaskForm.addEventListener("submit", () => {
+    event.preventDefault();
+    let taskTitle = document.querySelector("#title")
+    let taskDescription = document.querySelector("#description")
+    let taskPriority = document.querySelector("#priority")
+    let taskProject = document.querySelector("#projectOptions")
+    let taskDueDate = document.querySelector("#duedate")
+
+
+
+    if (taskTitle.value !== "" && taskDescription.value !== "" && taskPriority.value !== "" && taskProject.value !== "" && taskDueDate.value !== "") {
+    // Debugging Form Inputs
+    console.log("Title "+ taskTitle.value)
+    console.log("Description "+ taskDescription.value)
+    console.log("Priority "+ taskPriority.value)
+    console.log("Project "+ taskProject.value)
+    console.log("DueDate "+ taskDueDate.value)
+      let task = new Task (taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
+      myTodo.getProject(taskProject.value).addTask(task)
+      taskRender(taskProject.value, myTodo)
+      newTaskForm.reset()
+    }
+    
+  })
 }
+// Display Tasks on performing click on projects ... and by default also
+// function taskList(projectID) {
+//   console.log("Print Tasksof Project with ID: " + projectID);
+// }
 
 
 
@@ -97,9 +126,11 @@ function projectDisplayer(projectInstance) {
     //             <div class="deleteProject"><i class="fa-regular fa-circle-xmark"></i></div></li>
 
     const project = document.createElement("li");
+    project.classList.add("projectListName")
+    project.setAttribute('data-id', `${projectInstance.projects[i].id}`)
     // project.setAttribute("data-uid", `${projectInstance.projects[i].id}`)
 
-    project.innerHTML = `<div class="projectName">${projectInstance.projects[i].name}</div>
+    project.innerHTML = `<div class="projectName" data-id="${projectInstance.projects[i].id}">${projectInstance.projects[i].name}</div>
                     <div class="deleteProject" data-id="${projectInstance.projects[i].id}"><i class="fa-regular fa-circle-xmark"></i></div>`;
     console.log("It worked: " + projectInstance.projects[i].name);
 
@@ -109,7 +140,9 @@ function projectDisplayer(projectInstance) {
     // Project List Updation on Todo Form
     const projectOption = document.createElement("option");
 
-    projectOption.innerHTML = `<option value="${projectInstance.projects[i].name}">${projectInstance.projects[i].name}</option>`;
+    // projectOption.innerHTML = `<option value="${projectInstance.projects[i].id}">${projectInstance.projects[i].name}</option>`;
+    projectOption.value = projectInstance.projects[i].id;
+    projectOption.textContent = projectInstance.projects[i].name;
 
     projectSelection.appendChild(projectOption);
   }
@@ -118,16 +151,124 @@ function projectDisplayer(projectInstance) {
 
   deleteProjectBtns.forEach((button) => {
     button.addEventListener("click", (event) => {
+      event.stopPropagation()
       const idToDelete = event.currentTarget.dataset.id;
       projectInstance.deleteProject(idToDelete);
+
+      if (idToDelete === activeProjectID) {
+        const todoList = document.querySelector(".todo-list")
+        todoList.innerHTML = "";
+        const projectName = document.querySelector(".todoProjectName")
+        projectName.innerHTML = ""
+        activeProjectID = null;
+      }
       projectDisplayer(projectInstance);
+      
     });
   });
+
+  const projectButton = document.querySelectorAll(".projectListName")
+
+  projectButton.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const projectID = event.currentTarget.dataset.id;
+      activeProjectID = projectID;
+      taskRender(projectID, projectInstance)
+    })
+  })
 }
 
 
 
 
+
+// Task Display Controller
+function taskRender(projectID, projectInstance) {
+  console.log("Works To Display Tasks of Project with ID " + projectID);
+  console.log(projectInstance.getProject(projectID))
+
+  const project = projectInstance.getProject(projectID)
+  console.log(project.getTask(projectID))
+
+  const tasks = project.getTask(projectID)
+
+  const todoList = document.querySelector(".todo-list")
+  todoList.innerHTML = ""
+
+  const projectName = document.querySelector(".todoProjectName")
+  projectName.innerHTML = `${project.name}`
+
+  tasks.forEach((taskElement) => {
+    let task = document.createElement("div")
+    // task.classList.add("todo")
+    if (taskElement.toggleCheckList) {
+
+    
+    task.innerHTML = `<div class="todo">
+              <div class="leftContainer">
+                <div class="todoTitle">${taskElement.title}</div>
+                <div class="miniContainer">
+                  <div class="todoDue">Due Date: <span class="todoDueDate">${taskElement.dueDate}</span></div>
+                  <div class="todoPriority">Priority: <span id="priority-${taskElement.priority}">${taskElement.priority}</span></div>
+                </div>
+              </div>
+              <div class="rightContainer">
+                <div class="todoCheckList" style="color:green;"  id="${taskElement.id}"><i class="fa-regular fa-square-check"></i></div>
+                <div class="todoDelete" id="${taskElement.id}"><i class="fa-solid fa-trash"></i></div>
+              </div>
+            </div>`
+    }
+    else {
+      task.innerHTML = `<div class="todo">
+              <div class="leftContainer">
+                <div class="todoTitle">${taskElement.title}</div>
+                <div class="miniContainer">
+                  <div class="todoDue">Due Date: <span class="todoDueDate">${taskElement.dueDate}</span></div>
+                  <div class="todoPriority">Priority: <span id="priority-${taskElement.priority}">${taskElement.priority}</span></div>
+                </div>
+              </div>
+              <div class="rightContainer">
+                <div class="todoCheckList" id="${taskElement.id}"><i class="fa-regular fa-square-check"></i></div>
+                <div class="todoDelete" id="${taskElement.id}"><i class="fa-solid fa-trash"></i></div>
+              </div>
+            </div>`
+    }
+    console.log(taskElement.title);
+    console.log(task);
+    todoList.appendChild(task)
+
+  })
+
+  const deleteTasks = document.querySelectorAll(".todoDelete")
+  deleteTasks.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      const taskID = event.currentTarget.id
+      const temp = projectInstance.getProject(activeProjectID)
+      console.log(temp)
+      console.log("getting the Task ID for deletion " + projectInstance.getProject(activeProjectID).deleteTask(taskID));
+      projectInstance.getProject(activeProjectID).deleteTask(taskID)
+      taskRender(activeProjectID, projectInstance)
+    })
+  })
+
+
+  const changeStatus = document.querySelectorAll(".todoCheckList")
+  changeStatus.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      const taskID = event.currentTarget.id;
+      console.log("id returned after pressing greennnnnnnn"+ taskID);
+      
+      const tempTask = projectInstance.getProject(activeProjectID)
+      // console.log("CHange Status of Task" + projectInstance.getProject(activeProjectID).toggleCheckList(taskID));
+      
+      projectInstance.getProject(activeProjectID).toggleCheckList(taskID)
+      taskRender(activeProjectID, projectInstance)
+
+
+    })
+  })
+  console.log(todoList);
+}
 
 
 export { sideBarOpenClose };
@@ -135,6 +276,9 @@ export { todoForm };
 export { todoFormSubmission };
 
 export { newProjectAdd };
+export { newTaskAdd }
 
 export { projectDisplayer };
 export { deleteProject };
+
+// export { taskDisplay }

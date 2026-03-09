@@ -30,18 +30,27 @@
             </div>
             <div class="projectList">
               <ul class="projects">
-                <li><div class="projectName">Default</div>
-                <div class="deleteProject"><i class="fa-regular fa-circle-xmark"></i></div></li>
+                <li>
+                  <div class="projectName projectSelected">Default</div>
+                  <div class="deleteProject">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                  </div>
+                </li>
                 <li>Web Dev</li>
                 <li>Blogging</li>
               </ul>
             </div>
             <div class="createprojectForm">
               <form class="newProjectAdd" id="newProjectAdd" action="">
-                <input type="text" id="newProject" name="project" placeholder="New Project">
+                <input
+                  type="text"
+                  id="newProject"
+                  name="project"
+                  placeholder="New Project"
+                />
                 <!-- <div class="newProjectBtn"> -->
-                  <!-- <input type="submit" value="Submit" /> -->
-                  <button type="submit"><i class="fa-solid fa-check"></i></button>
+                <!-- <input type="submit" value="Submit" /> -->
+                <button type="submit"><i class="fa-solid fa-check"></i></button>
                 <!-- </div> -->
               </form>
             </div>
@@ -68,9 +77,31 @@
         </div>
         <div class="todos">
           <div class="todo-counters">
-            <!-- <p>Your Tasks :</p> -->
+            <p class="todoProjectName">Your Tasks :</p>
           </div>
-          <div class="todo-list">here</div>
+          <div class="todo-list">
+            <div class="todo">
+              <div class="leftContainer">
+                <div class="todoTitle">
+                  Welcome to Todo App, you can use it to increase productivity
+                </div>
+                <div class="miniContainer">
+                  <div class="todoDue">
+                    Due Date: <span class="todoDueDate">Today</span>
+                  </div>
+                  <div class="todoPriority">
+                    Priority: <span id="priority-High">High</span>
+                  </div>
+                </div>
+              </div>
+              <div class="rightContainer">
+                <div class="todoChecklist">
+                  <i class="fa-regular fa-square-check"></i>
+                </div>
+                <div class="todoDelete"><i class="fa-solid fa-trash"></i></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -78,13 +109,13 @@
         <form action="" id="todo-form">
           <div class="form-title">Add Task</div>
           <input type="text" id="title" name="title" placeholder="Title" />
-          <textarea rows="3" placeholder="Description"></textarea>
+          <textarea rows="3" id="description" placeholder="Description"></textarea>
           <div class="form-row">
             <label for="priority">Priority</label>
             <select id="priority" name="project">
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
             </select>
           </div>
           <div class="form-row">
@@ -94,8 +125,8 @@
             </select>
           </div>
           <div class="form-row">
-            <label for="duedate">Due Date</label>       
-            <input class="dueDate" i type="date" id="duedate" name="duedate" />
+            <label for="duedate">Due Date</label>
+            <input class="dueDate" type="date" id="duedate" name="duedate" />
           </div>
           <input type="submit" value="Submit" />
         </form>

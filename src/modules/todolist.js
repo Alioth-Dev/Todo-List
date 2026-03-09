@@ -16,8 +16,8 @@ class TodoList {
         this.projects = this.projects.filter(tempProject => tempProject.id !== uniqueID)
     }
 
-    getProject(index) {
-        return this.projects[index]
+    getProject(uniqueID) {
+        return this.projects.find(projectID => projectID.id === uniqueID)
     }
 }
 
