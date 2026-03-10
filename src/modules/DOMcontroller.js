@@ -1,11 +1,14 @@
+// importing Date-fns Required Funcntions
+import { format, parseISO } from "date-fns";
+
 // Importing Logic Files
 import { Project } from "./project.js"
 import { Task } from "./task.js";
 
 import { saveToLocalStorage } from "./localStorage.js";
+
 let activeProjectID = null;
 
-// import { getTaskSByProjectID } from "./core.js";
 // Connecting Ui to Js
 
 // Sidebar Open Close Functionality
@@ -33,7 +36,6 @@ function todoForm() {
 
   createTodoBtn.addEventListener("click", () => {
     newTodoForm.showModal();
-    console.log("modal open");
   });
 
   window.addEventListener("click", function (e) {
@@ -49,7 +51,6 @@ function todoFormSubmission() {
   const todoForm = document.querySelector("#todo-form");
   todoForm.addEventListener("submit", () => {
     event.preventDefault();
-    console.log("Form Submission is Working Cool!");
     newTodoForm.close();
   });
 }
@@ -62,13 +63,14 @@ function newProjectAdd(newProjectInstance) {
     let projectName = document.querySelector("#newProject");
 
     if (projectName.value !== "") {
-      console.log(projectName.value);
       newProjectInstance.addProject(new Project(`${projectName.value}`))
+
+      //Local Storage Updater
       saveToLocalStorage(newProjectInstance)
     }
 
     newProjectForm.reset();
-    projectDisplayer(newProjectInstance);
+    projectRender(newProjectInstance);
   });
 }
 
@@ -80,37 +82,31 @@ function newTaskAdd(myTodo) {
     let taskDescription = document.querySelector("#description")
     let taskPriority = document.querySelector("#priority")
     let taskProject = document.querySelector("#projectOptions")
-    let taskDueDate = document.querySelector("#duedate")
-
+    let taskDueDate = document.querySelector("#dueDate")
 
 
     if (taskTitle.value !== "" && taskDescription.value !== "" && taskPriority.value !== "" && taskProject.value !== "" && taskDueDate.value !== "") {
-    // Debugging Form Inputs
-    console.log("Title "+ taskTitle.value)
-    console.log("Description "+ taskDescription.value)
-    console.log("Priority "+ taskPriority.value)
-    console.log("Project "+ taskProject.value)
-    console.log("DueDate "+ taskDueDate.value)
-      let task = new Task (taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
+    // Date Formatiing
+    let date= parseISO(taskDueDate.value)
+    let formattedDate = format(date, "eee, do MMMM yyyy")
+
+      let task = new Task (taskTitle.value, taskDescription.value, formattedDate, taskPriority.value)
       myTodo.getProject(taskProject.value).addTask(task)
       taskRender(taskProject.value, myTodo)
 
+      //Local Storage Updater
       saveToLocalStorage(myTodo)
       newTaskForm.reset()
     }
     
   })
 }
-// Display Tasks on performing click on projects ... and by default also
-// function taskList(projectID) {
-//   console.log("Print Tasksof Project with ID: " + projectID);
-// }
+
 
 
 
 // Deletes the Project by ID
 function deleteProject(projectID) {
-  console.log(projectID);
   projectInstance.deleteProject(idToDelete);
 }
 
@@ -118,7 +114,7 @@ function deleteProject(projectID) {
 
 
 // Project Display Controller
-function projectDisplayer(projectInstance) {
+function projectRender(projectInstance) {
   const projectList = document.querySelector(".projects");
   projectList.innerHTML = "";
 
@@ -126,28 +122,20 @@ function projectDisplayer(projectInstance) {
   projectSelection.innerHTML = "";
 
   for (let i = 0; i < projectInstance.projects.length; i++) {
-    // <li><div class="projectName">Default</div>
-    //             <div class="deleteProject"><i class="fa-regular fa-circle-xmark"></i></div></li>
-
     const project = document.createElement("li");
     project.classList.add("projectListName")
     project.setAttribute('data-id', `${projectInstance.projects[i].id}`)
-    // project.setAttribute("data-uid", `${projectInstance.projects[i].id}`)
 
     project.innerHTML = `<div class="projectName" data-id="${projectInstance.projects[i].id}">${projectInstance.projects[i].name}</div>
                     <div class="deleteProject" data-id="${projectInstance.projects[i].id}"><i class="fa-regular fa-circle-xmark"></i></div>`;
-    console.log("It worked: " + projectInstance.projects[i].name);
 
     projectList.appendChild(project);
 
 
     // Project List Updation on Todo Form
     const projectOption = document.createElement("option");
-
-    // projectOption.innerHTML = `<option value="${projectInstance.projects[i].id}">${projectInstance.projects[i].name}</option>`;
     projectOption.value = projectInstance.projects[i].id;
     projectOption.textContent = projectInstance.projects[i].name;
-
     projectSelection.appendChild(projectOption);
   }
 
@@ -169,7 +157,9 @@ function projectDisplayer(projectInstance) {
         projectName.innerHTML = ""
         activeProjectID = null;
       }
-      projectDisplayer(projectInstance);
+
+      // Render Projects
+      projectRender(projectInstance);
       
     });
   });
@@ -191,33 +181,22 @@ function projectDisplayer(projectInstance) {
 
 // Task Display Controller
 function taskRender(projectID, projectInstance) {
-  console.log("Works To Display Tasks of Project with ID " + projectID);
-  console.log(projectInstance.getProject(projectID))
-  // alert("I am printing ")
   
   const project = projectInstance.getProject(projectID)
-  console.log("length of array task in this project is "+ project.getTask(projectID).length);
-  console.log(project.getTask(projectID));
-  
-  console.log(project.getTask(projectID))
-
   const tasks = project.getTask(projectID)
-
   const todoList = document.querySelector(".todo-list")
   todoList.innerHTML = ""
-
   const projectName = document.querySelector(".todoProjectName")
   projectName.innerHTML = `${project.name}`
 
   tasks.forEach((taskElement) => {
     let task = document.createElement("div")
-    // task.classList.add("todo")
     if (taskElement.toggleCheckList) {
 
-    
     task.innerHTML = `<div class="todo">
               <div class="leftContainer">
-                <div class="todoTitle">${taskElement.title}</div>
+                <div class="todoTitle" style="text-decoration: line-through;" >${taskElement.title}</div>
+                <div class="todoDescription">Description: ${taskElement.description}</div>
                 <div class="miniContainer">
                   <div class="todoDue">Due Date: <span class="todoDueDate">${taskElement.dueDate}</span></div>
                   <div class="todoPriority">Priority: <span id="priority-${taskElement.priority}">${taskElement.priority}</span></div>
@@ -233,6 +212,7 @@ function taskRender(projectID, projectInstance) {
       task.innerHTML = `<div class="todo">
               <div class="leftContainer">
                 <div class="todoTitle">${taskElement.title}</div>
+                <div class="todoDescription">Description: ${taskElement.description}</div>
                 <div class="miniContainer">
                   <div class="todoDue">Due Date: <span class="todoDueDate">${taskElement.dueDate}</span></div>
                   <div class="todoPriority">Priority: <span id="priority-${taskElement.priority}">${taskElement.priority}</span></div>
@@ -244,8 +224,6 @@ function taskRender(projectID, projectInstance) {
               </div>
             </div>`
     }
-    console.log(taskElement.title);
-    console.log(task);
     todoList.appendChild(task)
 
   })
@@ -258,14 +236,11 @@ function taskRender(projectID, projectInstance) {
         activeProjectID = projectID
       }
       const temp = projectInstance.getProject(activeProjectID)
-      console.log(temp)
-      console.log("getting the Task ID for deletion " + projectInstance.getProject(activeProjectID).deleteTask(taskID));
       projectInstance.getProject(activeProjectID).deleteTask(taskID)
 
       //Local Storage Updater
       saveToLocalStorage(projectInstance)
-
-
+      // Render Tasks
       taskRender(activeProjectID, projectInstance)
     })
   })
@@ -275,24 +250,21 @@ function taskRender(projectID, projectInstance) {
   changeStatus.forEach((element) => {
     element.addEventListener("click", (event) => {
       const taskID = event.currentTarget.id;
-      console.log("id returned after pressing greennnnnnnn"+ taskID);
       if(activeProjectID == null) {
         activeProjectID = projectID
       }
       const tempTask = projectInstance.getProject(activeProjectID)
-      // console.log("CHange Status of Task" + projectInstance.getProject(activeProjectID).toggleCheckList(taskID));
-      
       projectInstance.getProject(activeProjectID).toggleCheckList(taskID)
 
       //Local Storage Updater
       saveToLocalStorage(projectInstance)
-
+      // render Tasks
       taskRender(activeProjectID, projectInstance)
 
 
     })
   })
-  console.log(todoList);
+
 }
 
 
@@ -303,8 +275,6 @@ export { todoFormSubmission };
 export { newProjectAdd };
 export { newTaskAdd }
 
-export { projectDisplayer };
+export { projectRender };
 export { taskRender }
 export { deleteProject };
-
-// export { taskDisplay }

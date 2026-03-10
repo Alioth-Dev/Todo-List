@@ -30,14 +30,7 @@
             </div>
             <div class="projectList">
               <ul class="projects">
-                <li>
-                  <div class="projectName projectSelected">Default</div>
-                  <div class="deleteProject">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                  </div>
-                </li>
-                <li>Web Dev</li>
-                <li>Blogging</li>
+                <!-- Projects Render here By JS in li tag -->
               </ul>
             </div>
             <div class="createprojectForm">
@@ -48,10 +41,7 @@
                   name="project"
                   placeholder="New Project"
                 />
-                <!-- <div class="newProjectBtn"> -->
-                <!-- <input type="submit" value="Submit" /> -->
                 <button type="submit"><i class="fa-solid fa-check"></i></button>
-                <!-- </div> -->
               </form>
             </div>
           </div>
@@ -67,7 +57,7 @@
             />
           </div>
           <div class="quote">
-            <p>... Hardest Paths are the Easiest Paths ...</p>
+            <p>In order to succeed, we must first believe that we can.</p>
           </div>
           <div class="add-todo">
             <button class="todo-create">
@@ -79,9 +69,7 @@
           <div class="todo-counters">
             <p class="todoProjectName">Your Tasks :</p>
           </div>
-          <div class="todo-list">
-            
-          </div>
+          <div class="todo-list"></div>
         </div>
       </div>
 
@@ -89,7 +77,11 @@
         <form action="" id="todo-form">
           <div class="form-title">Add Task</div>
           <input type="text" id="title" name="title" placeholder="Title" />
-          <textarea rows="3" id="description" placeholder="Description"></textarea>
+          <textarea
+            rows="3"
+            id="description"
+            placeholder="Description"
+          ></textarea>
           <div class="form-row">
             <label for="priority">Priority</label>
             <select id="priority" name="project">
@@ -106,7 +98,7 @@
           </div>
           <div class="form-row">
             <label for="duedate">Due Date</label>
-            <input class="dueDate" type="date" id="duedate" name="duedate" />
+            <input class="dueDate" type="date" id="dueDate" name="duedate" />
           </div>
           <input type="submit" value="Submit" />
         </form>

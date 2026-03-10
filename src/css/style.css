@@ -1,354 +1,392 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #1f1f1f;
-    color: #9f9f9f;
+  font-family: "Poppins", sans-serif;
+  background-color: #1f1f1f;
+  color: #9f9f9f;
 }
 
 .main-container {
-    display: flex;
-    
+  display: flex;
 }
 
-
 .sidebar-closed {
-    display: none;
+  display: none;
 }
 
 .sidebar {
-    width: 20%;
-    height: 100vh;
-    background-color: #151515;
+  width: 20%;
+  height: 100vh;
+  background-color: #151515;
 }
 
 .sidebar-group {
-    padding: 18px;
+  padding: 18px;
 }
 
 .sidebar-icon-img {
-    width: 26px;
+  width: 26px;
 }
-
-
 
 /* Css for todo Area */
 
 .todo-area {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .sidebar-icon-open {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .header {
-    display: flex;
-    /* height: 4rem; */
-    padding: 18px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1b1b1b;
+  display: flex;
+  /* height: 4rem; */
+  padding: 14px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1b1b1b;
 }
 
 .todo-create {
-    padding: 8px 14px;
-    background-color: #151515;
-    border: none;
-    color: #9f9f9f;
-    font-size: 14px;
-    border-radius: 4px;
+  padding: 8px 14px;
+  background-color: #151515;
+  border: none;
+  color: #9f9f9f;
+  font-size: 14px;
+  border-radius: 4px;
 }
 
 .quote {
-    font-weight: 500;
+  font-weight: 500;
 }
-
 
 /* Designing Dialog Form */
 
 .form-title {
-    text-align: center;
-    color: #9f9f9f;
-    padding: 10px 29px;
-    font-weight: 600;
-    font-size: 18px;
+  text-align: center;
+  color: #9f9f9f;
+  padding: 10px 29px;
+  font-weight: 600;
+  font-size: 18px;
 }
 dialog {
-    position:fixed;
-    left: 50%;
-    top: 50%;
-    -ms-transform: translate(-50%,-50%);
-    -moz-transform:translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-     transform: translate(-50%,-50%);
-     border: none;
-     border-radius: 7px;
-     padding: 16px;
-     background-color: #1f1f1f;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 7px;
+  padding: 16px;
+  background-color: #1f1f1f;
 }
 
 #todo-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 12px;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 12px;
 }
-#todo-form input[type='text'] {
-    border: none;
-    background-color: #1b1b1b;
-    padding: 6px 10px;
-    border-radius: 5px;
-    margin: 10px 20px;
-    caret-color: #9f9f9f;
-    color: #9f9f9f;
-    font-size: 14px;
+#todo-form input[type="text"] {
+  border: none;
+  background-color: #1b1b1b;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 10px 20px;
+  caret-color: #9f9f9f;
+  color: #9f9f9f;
+  font-size: 14px;
 }
 
-input[type='text']:focus, input[type='number']:focus {
-    outline: none;
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
 }
 
 .new-todo-form form textarea {
-    border: none;
-    background-color: #1b1b1b;
-    padding: 6px 10px;
-    border-radius: 5px;
-    margin: 10px 20px;
-    caret-color: #9f9f9f;
-    color: #9f9f9f;
-    resize: none;
-    outline: none;
-    font-size: 14px;
+  border: none;
+  background-color: #1b1b1b;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 10px 20px;
+  caret-color: #9f9f9f;
+  color: #9f9f9f;
+  resize: none;
+  outline: none;
+  font-size: 14px;
 }
 
 .form-row {
-    display: flex;
-    justify-content: space-between;
-    background-color: #1b1b1b;
-    padding: 6px 10px;
-    border-radius: 5px;
-    margin: 10px 20px;
-    color: #9f9f9f;
-    font-size: 14px;
-    /* background-color: #fff; */
+  display: flex;
+  justify-content: space-between;
+  background-color: #1b1b1b;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 10px 20px;
+  color: #9f9f9f;
+  font-size: 14px;
 }
 
 .form-row select {
-    background-color: #1b1b1b;
-    color: #9f9f9f;
-    border-color: transparent;
-    font-size: 12px;
+  background-color: #1b1b1b;
+  color: #9f9f9f;
+  border-color: transparent;
+  font-size: 12px;
 }
-
 
 select:active {
   color: #000;
-  color: rgba(0,0,0,0);
+  color: rgba(0, 0, 0, 0);
   text-shadow: 0 0 0 #000;
   border-color: transparent;
 }
 
-
-#todo-form input[type='submit'] {
-    align-self: center;
-    width: 68px;
-    margin-top: 10px;
-    background-color: #1f1f1f;
-    border: none;
-    color: #9f9f9f;
-    border: 1px solid #151515;
-    padding: 6px 12px;
-    border-radius: 8px;
-    align-items: center;
+#todo-form input[type="submit"] {
+  align-self: center;
+  width: 68px;
+  margin-top: 10px;
+  background-color: #1f1f1f;
+  border: none;
+  color: #9f9f9f;
+  border: 1px solid #151515;
+  padding: 6px 12px;
+  border-radius: 8px;
+  align-items: center;
 }
 
 .dueDate {
-    outline: none;
-    background: #1b1b1b;
-    color: #9f9f9f;
-    border: none;
-    width: 50%;
+  outline: none;
+  background: #1b1b1b;
+  color: #9f9f9f;
+  border: none;
+  width: 50%;
 }
 
 /* Designing Sidebar */
 
 .tasks-group {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    gap: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  gap: 0.6rem;
 }
 
 .tasks-group p {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-top: 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 12px;
 }
 
 .tasks-group ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 10px 0px;
-    margin-bottom: 5px;
-    /* background-color: #fff; */
-    /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 10px 0px;
+  margin-bottom: 5px;
 }
 .tasks-group ul li {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 10px;
-    background-color: #1b1b1b;
-    list-style: none;
-    padding: 4px 16px;
-    border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+  background-color: #1b1b1b;
+  list-style: none;
+  padding: 4px 16px;
+  border-radius: 5px;
 }
 
-
-
 .deleteProject {
-    color: red;
-    opacity: 0;
-    transition: opacity 0.1s ease;
+  color: red;
+  opacity: 0;
+  transition: opacity 0.1s ease;
 }
 
 .tasks-group ul li:hover .deleteProject {
-    opacity: 100;
+  opacity: 100;
 }
 
 .createprojectForm {
-    display: flex;
-    flex-direction: column;
-    padding: 2px;
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
 }
 
 .newProjectBtn {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.newProjectAdd input[type='text'] {
-    border: none;
-    background-color: #1b1b1b;
-    padding: 6px 10px;
-    border-radius: 5px;
-    /* margin: 10px 20px; */
-    caret-color: #9f9f9f;
-    color: #9f9f9f;
-    font-size: 14px;
-    width: 100%;
+.newProjectAdd input[type="text"] {
+  border: none;
+  background-color: #1b1b1b;
+  padding: 6px 10px;
+  border-radius: 5px;
+  /* margin: 10px 20px; */
+  caret-color: #9f9f9f;
+  color: #9f9f9f;
+  font-size: 14px;
+  width: 100%;
 }
 
-input[type='text']:focus, input[type='number']:focus {
-    outline: none;
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
 }
-
 
 .newProjectAdd {
-  position: relative; /* Acts as an anchor for the button */
-  /* width: 300px; */
+  position: relative;
 }
 
 .newProjectAdd input {
   width: 100%;
-  /* padding: 10px; */
-  /* padding-right: 50px; Space for the button so text doesn't overlap */
-  /* box-sizing: border-box; */
 }
 
 .newProjectAdd button {
   position: absolute;
   right: 14px;
   top: 50%;
-  transform: translateY(-50%); /* Centers the button vertically */
-  /* padding: 5px 10px; */
+  transform: translateY(-50%);
   background: none;
   border: none;
 }
 
 .newProjectAdd button i {
-    color: green;
-    align-items: center;
+  color: green;
+  align-items: center;
 }
-
 
 /* Styling Task Area */
 .todos {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
 }
 
 .todoProjectName {
-    font-size: 1.2rem;
-    font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 .todo-list {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .todo {
-    display: flex;
-    background-color: #151515;
-    justify-content: space-between;
-    padding: 0.8rem 1.2rem;
-    border-radius: 4px;
+  display: flex;
+  background-color: #151515;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
 }
 
 .todoTitle {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
 
+.todoDescription {
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+  padding: 2px 0px;
+}
 .leftContainer {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 14;
-
+  display: flex;
+  flex-direction: column;
+  flex-grow: 14;
 }
 
 .miniContainer {
-    display: flex;
-    gap: 1.4rem;
-    font-size: 14px;
-    
+  display: flex;
+  gap: 1.4rem;
+  font-size: 14px;
 }
 
 .rightContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
 }
 
-
 .todoDelete :hover {
-    color: red;
+  color: red;
 }
 
 #priority-High {
-    color: orange;
+  color: orange;
 }
 #priority-Medium {
-    color: yellow;
+  color: yellow;
 }
 #priority-Low {
-    color: green;
+  color: green;
 }
 
-/* .todoCheckList {
-    color: green;
-} */
+/* Mobile Responsive CSS */
+
+@media only screen and (max-device-width: 600px) {
+
+  .sidebar {
+    width: 40%;
+    position:absolute;
+}
+
+.quote {
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 2px 8px;
+}
+
+.todo-create {
+    /* padding: 0.5rem 0.5rem; */
+    padding: 6px 6px;
+    font-size: 12px;
+    width: 6rem;
+}
+
+.leftContainer {
+    flex-grow: 10;
+}
+
+.rightContainer {
+    flex-direction: column;
+    flex-grow: 4;
+}
+
+.miniContainer {
+    font-size: 14px;
+}
+
+.todoDue {
+    font-size: 0.8rem;
+}
+.todoPriority {
+    font-size: 0.8rem;
+}
+
+.todos {
+    
+    padding: 0.2rem;
+}
+
+.todoProjectName {
+    padding-left: 1rem;
+    padding-top: 0.6rem;
+}
+
+.todo {
+    padding: 0.7rem 1rem;
+}
+}
