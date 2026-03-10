@@ -5,7 +5,7 @@ import { Project } from "./project.js";
 class TodoList {
     constructor() {
         this.projects = [];
-        this.projects.push(new Project("Default"))
+        // this.projects.push(new Project("Default"))
     }
 
     addProject(newProject) {

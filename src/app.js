@@ -15,26 +15,42 @@ import { TodoList } from "./modules/todolist.js";
 
 
 import { projectDisplayer } from "./modules/DOMcontroller.js";
+import { taskRender } from "./modules/DOMcontroller.js";
 
 
+import { loadFromLocalStorage } from "./modules/localStorage.js";
 //Initializing App
 console.log("Todo App Working");
-export const myTodo = new TodoList()
+let myTodo = new TodoList()
+
+
 
 // Manually Tasting JS Logic
-const bikeService = new Project("Bike Service")
-myTodo.addProject(bikeService)
+const defaultProject = new Project("Default")
+myTodo.addProject(defaultProject)
 
 const bikeWash = new Task ("Bike Wash", "Wash with Shampoo", "07-03-2026", "Low")
-const bikeWash2 = new Task ("Bike Wash", "Wash with Shampoo", "07-03-2026", "Medium")
-bikeService.addTask(bikeWash)
-bikeService.addTask(bikeWash2)
+// const bikeWash2 = new Task ("Bike Wash", "Wash with Shampoo", "07-03-2026", "Medium")
+defaultProject.addTask(bikeWash)
+// bikeService.addTask(bikeWash2)
 
+// myTodo.projects[0].addTask(bikeWash)
 console.log(myTodo);
-bikeService.deleteTask("ffbdcb96-7767-47d7-a958-85fd6355618b")
 console.log(myTodo);
 
 
+
+
+
+
+
+loadFromLocalStorage(myTodo)
+
+if(!(myTodo.projects.length == 0)) {
+    taskRender(myTodo.projects[0].id, myTodo)
+}
+// taskRender(myTodo.projects[0].id, myTodo)
+// taskRender(myTodo.projects[0].id, myTodo)
 // export { myTodo }
 // Connecting UI to JS
 sideBarOpenClose()

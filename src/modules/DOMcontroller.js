@@ -2,6 +2,7 @@
 import { Project } from "./project.js"
 import { Task } from "./task.js";
 
+import { saveToLocalStorage } from "./localStorage.js";
 let activeProjectID = null;
 
 // import { getTaskSByProjectID } from "./core.js";
@@ -63,6 +64,7 @@ function newProjectAdd(newProjectInstance) {
     if (projectName.value !== "") {
       console.log(projectName.value);
       newProjectInstance.addProject(new Project(`${projectName.value}`))
+      saveToLocalStorage(newProjectInstance)
     }
 
     newProjectForm.reset();
@@ -92,6 +94,8 @@ function newTaskAdd(myTodo) {
       let task = new Task (taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value)
       myTodo.getProject(taskProject.value).addTask(task)
       taskRender(taskProject.value, myTodo)
+
+      saveToLocalStorage(myTodo)
       newTaskForm.reset()
     }
     
@@ -155,6 +159,9 @@ function projectDisplayer(projectInstance) {
       const idToDelete = event.currentTarget.dataset.id;
       projectInstance.deleteProject(idToDelete);
 
+      //Local Storage Updater
+      saveToLocalStorage(projectInstance)
+
       if (idToDelete === activeProjectID) {
         const todoList = document.querySelector(".todo-list")
         todoList.innerHTML = "";
@@ -186,8 +193,12 @@ function projectDisplayer(projectInstance) {
 function taskRender(projectID, projectInstance) {
   console.log("Works To Display Tasks of Project with ID " + projectID);
   console.log(projectInstance.getProject(projectID))
-
+  // alert("I am printing ")
+  
   const project = projectInstance.getProject(projectID)
+  console.log("length of array task in this project is "+ project.getTask(projectID).length);
+  console.log(project.getTask(projectID));
+  
   console.log(project.getTask(projectID))
 
   const tasks = project.getTask(projectID)
@@ -243,10 +254,18 @@ function taskRender(projectID, projectInstance) {
   deleteTasks.forEach((element) => {
     element.addEventListener("click", (event) => {
       const taskID = event.currentTarget.id
+      if(activeProjectID == null) {
+        activeProjectID = projectID
+      }
       const temp = projectInstance.getProject(activeProjectID)
       console.log(temp)
       console.log("getting the Task ID for deletion " + projectInstance.getProject(activeProjectID).deleteTask(taskID));
       projectInstance.getProject(activeProjectID).deleteTask(taskID)
+
+      //Local Storage Updater
+      saveToLocalStorage(projectInstance)
+
+
       taskRender(activeProjectID, projectInstance)
     })
   })
@@ -257,11 +276,17 @@ function taskRender(projectID, projectInstance) {
     element.addEventListener("click", (event) => {
       const taskID = event.currentTarget.id;
       console.log("id returned after pressing greennnnnnnn"+ taskID);
-      
+      if(activeProjectID == null) {
+        activeProjectID = projectID
+      }
       const tempTask = projectInstance.getProject(activeProjectID)
       // console.log("CHange Status of Task" + projectInstance.getProject(activeProjectID).toggleCheckList(taskID));
       
       projectInstance.getProject(activeProjectID).toggleCheckList(taskID)
+
+      //Local Storage Updater
+      saveToLocalStorage(projectInstance)
+
       taskRender(activeProjectID, projectInstance)
 
 
@@ -279,6 +304,7 @@ export { newProjectAdd };
 export { newTaskAdd }
 
 export { projectDisplayer };
+export { taskRender }
 export { deleteProject };
 
 // export { taskDisplay }
